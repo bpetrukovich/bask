@@ -14,26 +14,39 @@ const App = () => {
       {
         title: "first task",
         level: 0,
+        description: "Description some long long long text",
         subtasks: [
           {
             title: "Subtask",
             level: 1,
+            description:
+              "Description some long lDescription some long long long textDescription some long long long textong long text",
             subtasks: [
               {
                 title: "Another subtask",
                 level: 2,
-                subtasks: [{ title: "Third subtask", level: 3, subtasks: [] }],
+                description: "Description some long long long text",
+                subtasks: [
+                  {
+                    title: "Third subtask",
+                    level: 3,
+                    description: null,
+                    subtasks: [],
+                  },
+                ],
               },
             ],
           },
         ],
       },
-      { title: "second task", level: 0, subtasks: [] },
+      { title: "second task", level: 0, description: null, subtasks: [] },
       {
         title: "first task",
         level: 0,
+        description: "Description some long long long text",
         subtasks: [
           {
+            description: null,
             title: "Subtask",
             level: 1,
             subtasks: [],
