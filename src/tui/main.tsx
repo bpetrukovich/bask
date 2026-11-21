@@ -1,18 +1,52 @@
 import { render, Box, Text } from "ink";
 import { useFullScreen } from "./useFullScreen";
 import { create } from "zustand";
+import { TaskList, type TaskListView } from "./taskList";
+import type { TaskView } from "./task";
 
 const useTaskSelection = create();
 
 const App = () => {
   const screenSize = useFullScreen();
 
+  const tasks: TaskListView = {
+    tasks: [
+      {
+        title: "first task",
+        level: 0,
+        subtasks: [
+          {
+            title: "Subtask",
+            level: 1,
+            subtasks: [
+              {
+                title: "Another subtask",
+                level: 2,
+                subtasks: [{ title: "Third subtask", level: 3, subtasks: [] }],
+              },
+            ],
+          },
+        ],
+      },
+      { title: "second task", level: 0, subtasks: [] },
+      {
+        title: "first task",
+        level: 0,
+        subtasks: [
+          {
+            title: "Subtask",
+            level: 1,
+            subtasks: [],
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <Box
       width={screenSize.columns}
       height={screenSize.rows}
-      borderStyle="round"
-      borderColor="cyan"
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
@@ -22,13 +56,11 @@ const App = () => {
         height="100%"
         borderStyle="round"
         borderColor="cyan"
+        borderTop={false}
+        borderBottom={false}
         flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
       >
-        <Text>
-          full screen: {screenSize.columns}x{screenSize.rows}
-        </Text>
+        <TaskList taskListView={tasks} />
       </Box>
     </Box>
   );
