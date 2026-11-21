@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "bun run src/tui/main.tsx"
+    "dev": "bun run src/main.ts"
   },
   "keywords": [],
   "author": "",
@@ -11,7 +11,8 @@
   "description": "",
   "dependencies": {
     "ink": "^8.0.0",
-    "react": "^19.3.1"
+    "react": "^19.3.1",
+    "zustand": "^5.1.0"
   },
   "private": true,
   "devDependencies": {

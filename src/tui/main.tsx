@@ -1,5 +1,8 @@
 import { render, Box, Text } from "ink";
 import { useFullScreen } from "./useFullScreen";
+import { create } from "zustand";
+
+const useTaskSelection = create();
 
 const App = () => {
   const screenSize = useFullScreen();
@@ -31,6 +34,7 @@ const App = () => {
   );
 };
 
-const { waitUntilExit } = render(<App />);
-
-await waitUntilExit();
+export async function blockedRender() {
+  const { waitUntilExit } = render(<App />);
+  await waitUntilExit();
+}
