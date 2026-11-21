@@ -4,11 +4,18 @@ export interface FlatTaskView {
   title: string;
   level: number;
   description: string | null;
-  isGrey: boolean;
 }
 
-export const Task = ({ taskView }: { taskView: FlatTaskView }) => {
-  const { title, level, description, isGrey } = taskView;
+export const Task = ({
+  taskView,
+  isGrey,
+  isSelected,
+}: {
+  taskView: FlatTaskView;
+  isGrey: boolean;
+  isSelected: boolean;
+}) => {
+  const { title, level, description } = taskView;
 
   const marginLeft = level * 2;
 
@@ -21,7 +28,7 @@ export const Task = ({ taskView }: { taskView: FlatTaskView }) => {
       borderRight={false}
       borderStyle="round"
       borderBottom={false}
-      borderColor="cyan"
+      borderColor={isSelected ? "magenta" : "cyan"}
       marginLeft={marginLeft}
       paddingBottom={1}
       backgroundColor={backgroundColor}

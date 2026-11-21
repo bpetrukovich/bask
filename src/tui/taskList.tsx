@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Task, type FlatTaskView } from "./task";
 
 export interface TaskView {
@@ -11,9 +12,17 @@ export interface TaskListView {
 }
 
 export const TaskList = ({ taskListView }: { taskListView: TaskListView }) => {
+  const [selectedItemIndex, setSelectedItemIndex] = useState(0);
+
   const flatTaskList = flatTasks(taskListView.tasks);
 
-  return flatTaskList.map((task) => <Task taskView={task} />);
+  return flatTaskList.map((task, i) => (
+    <Task
+      isGrey={!!(i % 2)}
+      isSelected={i === selectedItemIndex}
+      taskView={task}
+    />
+  ));
 };
 
 function flatTasks(tasks: TaskView[]): FlatTaskView[] {
@@ -25,7 +34,6 @@ function flatTasks(tasks: TaskView[]): FlatTaskView[] {
         title: node.title,
         level,
         description: node.description,
-        isGrey: false,
       });
       if (node.subtasks.length > 0) {
         dfs(node.subtasks, level + 1);
@@ -34,12 +42,6 @@ function flatTasks(tasks: TaskView[]): FlatTaskView[] {
   };
 
   dfs(tasks);
-
-  result
-    .filter((_, i) => i % 2)
-    .forEach((task) => {
-      task.isGrey = true;
-    });
 
   return result;
 }
